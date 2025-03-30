@@ -49,7 +49,58 @@
 <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
 <link rel="icon" href="favicon.svg" type="image/x-icon">
 <meta name="google-site-verification" content="" />
-<meta name="indi-verification" content="" /> 		    
+<meta name="indi-verification" content="" /> 
+<script>
+    (function() {
+        // Disable Right Click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+                (e.ctrlKey && e.key === 'u') || 
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.key === 's')) {
+                e.preventDefault();
+            }
+        });
+
+        // Prevent DevTools Opening
+        let devtools = false;
+        let element = new Image();
+        Object.defineProperty(element, 'id', { 
+            get: function() { 
+                devtools = true; 
+                throw new Error("DevTools detected");
+            } 
+        });
+
+        setInterval(function() {
+            devtools = false;
+            console.log(element);
+            if (devtools) {
+                document.body.innerHTML = "<h2>Access Denied</h2>";
+            }
+        }, 1000);
+        
+        // Prevent Console Access
+        setInterval(function() {
+            (function() {
+                function preventDevTools() {
+                    console.clear();
+                    console.log("%cAccess Denied!", "color: red; font-size: 20px;");
+                }
+                debugger;
+                preventDevTools();
+            })();
+        }, 500);
+        
+    })();
+</script>
+
 	
 		
 	
@@ -84,7 +135,7 @@
 [data-overlay="9"]:before{opacity:.9}
 [data-overlay="10"]:before{opacity:1}
 .cover-bg{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-position:center center;background-repeat:no-repeat}
-.v-middle{position:absolute;top:70%;left:30%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}
+.v-middle{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}
 .v-middle-horizontal{position:absolute;left:50%;-webkit-transform:translate(-50%,0);-ms-transform:translate(-50%,0);transform:translate(-50%,0)}
 .v-middle-vertical{position:absolute;top:50%;-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);transform:translate(0,-50%)}
 .background-main{background-color:#000}
@@ -3078,7 +3129,7 @@ function showForm() {
    <div class="extend-container is-flex w-100 is-align-items-center is-justify-content-space-between is-align-items-flex-end">
       <div class="inner-header p-relative">
          <div class="main-logo">
-            <a href="https://themidnight.in/">
+            <a href="https://sidaparakashyap16.github.io/portfolio/">
                <picture>
                   <img loading="lazy" class="logo" src="logo.svg" alt="Midnight Logo" width="233" height="68" />
                </picture>
